@@ -16,20 +16,18 @@ document.addEventListener("DOMContentLoaded", function () {
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom);
 
-  // make mapsvg 10x bigger
-
   // Load both files before doing anything else
   Promise.all([d3.json("us.geojson"), d3.csv("population.csv")]).then(function (
     values
   ) {
     mapData = values[0];
     popData = values[1];
-    // filter map data to only include state with STATE 37
+    // filter map data to only include state with STATE 47
     mapData.features = mapData.features.filter(function (d) {
       return d.properties.STATE == 47;
     });
 
-    // filter pop data to only include state with STATE 37
+    // filter pop data to only include state with STATE 47
     popData = popData.filter(function (d) {
       return d["GEO.display-label"] == "Tennessee";
     });
@@ -50,7 +48,7 @@ function drawMap() {
       +mapSvg.style("height").replace("px", "") / 2.3,
     ])
     // make projection bigger
-    .scale(5500);
+    .scale(5850);
   let path = d3.geoPath().projection(projection);
   let extent = d3.extent(
     popData,
